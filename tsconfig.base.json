@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@rad/ui": ["lib/ui/src/index.ts"],
+      "@rad/ui/server": ["lib/ui/src/server.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
