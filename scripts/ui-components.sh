@@ -13,5 +13,5 @@ if [ -z "$TYPE_NAME" ]; then
     exit 1
 fi
 
-nx g @nx/next:component --dir=lib/ui/src/$TYPE_NAME/$COMPONENT_NAME --nameAndDirectoryFormat=as-provided --name=$COMPONENT_NAME --style=scss --export
+nx g @nx/next:component --dir=lib/ui/src/$TYPE_NAME/$COMPONENT_NAME --nameAndDirectoryFormat=as-provided --name=$COMPONENT_NAME --style=@emotion/styled --export
 nx g @nx/next:component-story --componentPath=$TYPE_NAME/$COMPONENT_NAME/$COMPONENT_NAME.tsx --project=ui

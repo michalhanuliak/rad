@@ -1,5 +1,5 @@
 import './global.css';
-import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { PageWrapper } from '@rad/app-ui';
 
 export const metadata = {
   title: 'Welcome to generator',
@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AntdRegistry>{children}</AntdRegistry>
+        <PageWrapper>{children}</PageWrapper>
       </body>
     </html>
   );

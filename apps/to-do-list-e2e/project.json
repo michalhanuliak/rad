@@ -1,0 +1,7 @@
+{
+  "name": "to-do-list-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/to-do-list-e2e/src",
+  "targets": {},
+  "implicitDependencies": ["to-do-list"]
+}

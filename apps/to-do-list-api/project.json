@@ -1,0 +1,24 @@
+{
+  "name": "to-do-list-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/to-do-list-api/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "to-do-list-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "to-do-list-api:build:development"
+        },
+        "production": {
+          "buildTarget": "to-do-list-api:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

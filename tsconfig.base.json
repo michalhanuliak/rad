@@ -15,8 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@rad/infrastructure": ["lib/infrastructure/src/index.ts"],
+      "@rad/infrastructure/server": ["lib/infrastructure/src/server.ts"],
       "@rad/ui": ["lib/ui/src/index.ts"],
-      "@rad/ui/server": ["lib/ui/src/server.ts"]
+      "@rad/ui/atoms": ["lib/ui/src/atoms/index.ts"],
+      "@rad/ui/molecules": ["lib/ui/src/molecules/index.ts"],
+      "@rad/ui/organisms": ["lib/ui/src/organisms/index.ts"],
+      "@rad/ui/templates": ["lib/ui/src/templates/index.ts"],
+      "@rad/utils/*": ["lib/utils/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
