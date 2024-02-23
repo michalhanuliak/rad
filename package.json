@@ -5,11 +5,12 @@
   "scripts": {
     "app:gen:dev": "nx run generator:dev",
     "app:to-do-list:dev": "nx run to-do-list:dev",
-    "api:to-do-list": "nx serve to-do-list-api",
+    "api:to-do-list": "PORT=4000 nx serve to-do-list-api",
     "ui:gen:atom": "scripts/ui-components.sh atoms",
     "ui:gen:molecule": "scripts/ui-components.sh molecules",
     "ui:gen:organism": "scripts/ui-components.sh organisms",
-    "ui:gen:template": "scripts/ui-components.sh template"
+    "ui:gen:template": "scripts/ui-components.sh template",
+    "gen:infra": "npx orval --config ./lib/infrastructure/config/orval.config.js"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +27,8 @@
     "@nestjs/swagger": "^7.3.0",
     "@nx/nest": "^18.0.4",
     "@prisma/client": "5.10.2",
-    "axios": "^1.6.0",
+    "@tanstack/react-query": "^5.22.2",
+    "axios": "^1.6.7",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "date-fns": "^3.3.1",
@@ -40,6 +42,7 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "11.11.0",
+    "@faker-js/faker": "^8.4.1",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
     "@nx-tools/nx-prisma": "^5.2.0",
@@ -63,6 +66,7 @@
     "@swc/core": "~1.3.85",
     "@swc/helpers": "~0.5.2",
     "@swc/plugin-emotion": "^2.5.67",
+    "@tanstack/eslint-plugin-query": "^5.20.1",
     "@testing-library/react": "14.0.0",
     "@types/jest": "^29.4.0",
     "@types/node": "18.16.9",
@@ -86,6 +90,7 @@
     "jest-environment-jsdom": "^29.4.1",
     "jest-environment-node": "^29.4.1",
     "jsdom": "~22.1.0",
+    "msw": "^2.2.1",
     "nx": "18.0.4",
     "orval": "^6.25.0",
     "prettier": "^2.6.2",

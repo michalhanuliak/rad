@@ -1,21 +1,18 @@
+'use client';
+import { useGetToDoLists } from '@rad/infrastructure';
 import { Container } from '../components/Container';
 import styles from './page.module.scss';
 
-const DATA = [
-  {
-    id: 1,
-    title: 'Task 1',
-    description: 'Description 1',
-    date: '2021-10-10',
-    author: 'Author 1',
-    isChecked: true,
-  },
-];
+export default function Index() {
+  const { data, isLoading } = useGetToDoLists();
 
-export default async function Index() {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={styles.page}>
-      <Container data={DATA} />
+      <Container data={data} />
     </div>
   );
 }

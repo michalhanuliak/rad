@@ -11,7 +11,11 @@ export class AppService {
 
   public getToDoList() {
     this.logger.log('Getting to-do list');
-    return prisma.toDoList.findMany();
+    return prisma.toDoList.findMany({
+      include: {
+        tasks: true,
+      },
+    });
   }
 
   public createToDoList() {

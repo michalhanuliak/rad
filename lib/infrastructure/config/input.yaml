@@ -1,0 +1,95 @@
+openapi: 3.0.0
+paths:
+  /api/to-do-list:
+    get:
+      operationId: getToDoLists
+      summary: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - to-do-list
+    post:
+      operationId: createToDoList
+      summary: ''
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags:
+        - to-do-list
+  /api/to-do-list/{taskId}:
+    get:
+      operationId: getTask
+      summary: ''
+      parameters:
+        - name: taskId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+        - to-do-list
+  /api/to-do-list/{toDoListId}:
+    post:
+      operationId: createTask
+      summary: ''
+      parameters:
+        - name: toDoListId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskDto'
+      responses:
+        '201':
+          description: The record has been successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDto'
+      tags:
+        - to-do-list
+info:
+  title: Cats example
+  description: The cats API description
+  version: '1.0'
+  contact: {}
+tags:
+  - name: cats
+    description: ''
+servers: []
+components:
+  schemas:
+    CreateTaskDto:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - title
+        - description
+    TaskDto:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - title
+        - description

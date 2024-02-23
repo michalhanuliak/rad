@@ -22,6 +22,7 @@
       "@rad/ui/molecules": ["lib/ui/src/molecules/index.ts"],
       "@rad/ui/organisms": ["lib/ui/src/organisms/index.ts"],
       "@rad/ui/templates": ["lib/ui/src/templates/index.ts"],
+      "@rad/app-ui": ["lib/app-ui/src/index.ts"],
       "@rad/utils/*": ["lib/utils/src/*"]
     }
   },

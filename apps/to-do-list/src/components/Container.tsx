@@ -6,20 +6,21 @@ export type ContainerProps = {
 };
 
 export function Container({ data }: ContainerProps) {
-  const renderedData = data.map(
-    ({ id, title, description, date, author, isChecked }: any) => {
+  const renderedData = (data?.[0]?.tasks ?? []).map(
+    ({ id, title, description, updatedAt, author, isChecked }: any) => {
       return (
         <Task
           key={id}
           title={title}
           description={description}
-          date={date}
+          date={updatedAt}
           author={author}
           isChecked={isChecked}
         />
       );
     }
   );
+
   return (
     <Stack vertical>
       {renderedData}
