@@ -14,44 +14,27 @@ import {
   http
 } from 'msw'
 import type {
-  TaskDto
+  TaskDto,
+  ToDoListDto
 } from '../../schemas'
 
-export const getCreateTaskResponseMock = (overrideResponse: any = {}): TaskDto => ({description: faker.word.sample(), id: faker.number.int({min: undefined, max: undefined}), title: faker.word.sample(), ...overrideResponse})
+export const getGetToDoListResponseMock = (overrideResponse: any = {}): ToDoListDto => ({id: faker.number.int({min: undefined, max: undefined}), tasks: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.word.sample())), title: faker.word.sample(), ...overrideResponse})
+
+export const getCreateTaskResponseMock = (overrideResponse: any = {}): TaskDto => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, description: faker.word.sample(), id: faker.number.int({min: undefined, max: undefined}), isCompleted: faker.datatype.boolean(), listId: faker.number.int({min: undefined, max: undefined}), title: faker.word.sample(), ...overrideResponse})
+
+export const getCreateToDoListResponseMock = (overrideResponse: any = {}): ToDoListDto => ({id: faker.number.int({min: undefined, max: undefined}), tasks: Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => (faker.word.sample())), title: faker.word.sample(), ...overrideResponse})
+
+export const getGetTaskResponseMock = (overrideResponse: any = {}): TaskDto => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, description: faker.word.sample(), id: faker.number.int({min: undefined, max: undefined}), isCompleted: faker.datatype.boolean(), listId: faker.number.int({min: undefined, max: undefined}), title: faker.word.sample(), ...overrideResponse})
+
+export const getRemoveTaskResponseMock = (overrideResponse: any = {}): TaskDto => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, description: faker.word.sample(), id: faker.number.int({min: undefined, max: undefined}), isCompleted: faker.datatype.boolean(), listId: faker.number.int({min: undefined, max: undefined}), title: faker.word.sample(), ...overrideResponse})
+
+export const getUpdateTaskResponseMock = (overrideResponse: any = {}): TaskDto => ({createdAt: `${faker.date.past().toISOString().split('.')[0]}Z`, description: faker.word.sample(), id: faker.number.int({min: undefined, max: undefined}), isCompleted: faker.datatype.boolean(), listId: faker.number.int({min: undefined, max: undefined}), title: faker.word.sample(), ...overrideResponse})
 
 
-export const getGetToDoListsMockHandler = () => {
-  return http.get('*/api/to-do-list', async () => {
+export const getGetToDoListMockHandler = (overrideResponse?: ToDoListDto) => {
+  return http.get('*/api/to-do-list/:toDoListId', async () => {
     await delay(1000);
-    return new HttpResponse(null,
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
-  })
-}
-
-export const getCreateToDoListMockHandler = () => {
-  return http.post('*/api/to-do-list', async () => {
-    await delay(1000);
-    return new HttpResponse(null,
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    )
-  })
-}
-
-export const getGetTaskMockHandler = () => {
-  return http.get('*/api/to-do-list/:taskId', async () => {
-    await delay(1000);
-    return new HttpResponse(null,
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getGetToDoListResponseMock()),
       {
         status: 200,
         headers: {
@@ -75,9 +58,67 @@ export const getCreateTaskMockHandler = (overrideResponse?: TaskDto) => {
     )
   })
 }
+
+export const getCreateToDoListMockHandler = (overrideResponse?: ToDoListDto) => {
+  return http.post('*/api/to-do-list', async () => {
+    await delay(1000);
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getCreateToDoListResponseMock()),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    )
+  })
+}
+
+export const getGetTaskMockHandler = (overrideResponse?: TaskDto) => {
+  return http.get('*/api/to-do-list/:taskId', async () => {
+    await delay(1000);
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getGetTaskResponseMock()),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    )
+  })
+}
+
+export const getRemoveTaskMockHandler = (overrideResponse?: TaskDto) => {
+  return http.delete('*/api/to-do-list/task/:taskId', async () => {
+    await delay(1000);
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getRemoveTaskResponseMock()),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    )
+  })
+}
+
+export const getUpdateTaskMockHandler = (overrideResponse?: TaskDto) => {
+  return http.put('*/api/to-do-list/task/:taskId', async () => {
+    await delay(1000);
+    return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getUpdateTaskResponseMock()),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    )
+  })
+}
 export const getToDoListMock = () => [
-  getGetToDoListsMockHandler(),
+  getGetToDoListMockHandler(),
+  getCreateTaskMockHandler(),
   getCreateToDoListMockHandler(),
   getGetTaskMockHandler(),
-  getCreateTaskMockHandler()
+  getRemoveTaskMockHandler(),
+  getUpdateTaskMockHandler()
 ]

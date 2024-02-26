@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../themes';
 import { CssBaseline } from '@rad/ui/atoms';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export type PageWrapperProps = PropsWithChildren;
 

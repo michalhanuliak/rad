@@ -1,40 +1,24 @@
 openapi: 3.0.0
 paths:
-  /api/to-do-list:
+  /api/to-do-list/{toDoListId}:
     get:
-      operationId: getToDoLists
-      summary: ''
-      parameters: []
-      responses:
-        '200':
-          description: ''
-      tags:
-        - to-do-list
-    post:
-      operationId: createToDoList
-      summary: ''
-      parameters: []
-      responses:
-        '201':
-          description: ''
-      tags:
-        - to-do-list
-  /api/to-do-list/{taskId}:
-    get:
-      operationId: getTask
+      operationId: getToDoList
       summary: ''
       parameters:
-        - name: taskId
+        - name: toDoListId
           required: true
           in: path
           schema:
             type: string
       responses:
         '200':
-          description: ''
+          description: To do list record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToDoListDto'
       tags:
         - to-do-list
-  /api/to-do-list/{toDoListId}:
     post:
       operationId: createTask
       summary: ''
@@ -51,8 +35,90 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateTaskDto'
       responses:
+        '200':
+          description: Created task record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDto'
         '201':
           description: The record has been successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDto'
+      tags:
+        - to-do-list
+  /api/to-do-list:
+    post:
+      operationId: createToDoList
+      summary: ''
+      parameters: []
+      responses:
+        '200':
+          description: Created to do list record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToDoListDto'
+      tags:
+        - to-do-list
+  /api/to-do-list/{taskId}:
+    get:
+      operationId: getTask
+      summary: ''
+      parameters:
+        - name: taskId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDto'
+      tags:
+        - to-do-list
+  /api/to-do-list/task/{taskId}:
+    delete:
+      operationId: removeTask
+      summary: ''
+      parameters:
+        - name: taskId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Removed task record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDto'
+      tags:
+        - to-do-list
+    put:
+      operationId: updateTask
+      summary: ''
+      parameters:
+        - name: taskId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskDto'
+      responses:
+        '200':
+          description: Updated task record
           content:
             application/json:
               schema:
@@ -70,6 +136,44 @@ tags:
 servers: []
 components:
   schemas:
+    ToDoListDto:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        tasks:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - title
+        - tasks
+    TaskDto:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        description:
+          type: string
+        isCompleted:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        listId:
+          type: number
+      required:
+        - id
+        - title
+        - description
+        - isCompleted
+        - createdAt
+        - listId
     CreateTaskDto:
       type: object
       properties:
@@ -80,16 +184,16 @@ components:
       required:
         - title
         - description
-    TaskDto:
+    UpdateTaskDto:
       type: object
       properties:
-        id:
-          type: number
         title:
           type: string
         description:
           type: string
+        isCompleted:
+          type: boolean
       required:
-        - id
         - title
         - description
+        - isCompleted

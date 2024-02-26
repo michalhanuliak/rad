@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
 import { Logger } from '@nestjs/common';
-import { CreateTaskDto } from './to-do-list.dto';
+import { CreateTaskDto, UpdateTaskDto } from './to-do-list.dto';
 
 const prisma = new PrismaClient();
 
@@ -9,9 +9,12 @@ const prisma = new PrismaClient();
 export class AppService {
   private readonly logger = new Logger(AppService.name);
 
-  public getToDoList() {
+  public getToDoList(toDoListId: number) {
     this.logger.log('Getting to-do list');
-    return prisma.toDoList.findMany({
+    return prisma.toDoList.findFirstOrThrow({
+      where: {
+        id: toDoListId,
+      },
       include: {
         tasks: true,
       },
@@ -42,6 +45,28 @@ export class AppService {
       data: {
         ...task,
         listId: toDoListId,
+      },
+    });
+  }
+
+  public removeTask(taskId: number) {
+    this.logger.log('Removing task');
+    return prisma.task.delete({
+      where: {
+        id: taskId,
+      },
+    });
+  }
+
+  public async updateTask(taskId: number, task: UpdateTaskDto) {
+    this.logger.log('Updating task');
+
+    return prisma.task.update({
+      where: {
+        id: taskId,
+      },
+      data: {
+        ...task,
       },
     });
   }

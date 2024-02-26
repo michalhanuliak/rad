@@ -8,3 +8,5 @@
 
 export * from './createTaskDto';
 export * from './taskDto';
+export * from './toDoListDto';
+export * from './updateTaskDto';

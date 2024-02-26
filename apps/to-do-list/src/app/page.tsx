@@ -1,10 +1,10 @@
 'use client';
-import { useGetToDoLists } from '@rad/infrastructure';
+import { useToDoListAdapter } from '../adapters';
 import { Container } from '../components/Container';
 import styles from './page.module.scss';
 
 export default function Index() {
-  const { data, isLoading } = useGetToDoLists();
+  const { tasks, isLoading } = useToDoListAdapter('1');
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -12,7 +12,7 @@ export default function Index() {
 
   return (
     <div className={styles.page}>
-      <Container data={data} />
+      <Container data={tasks} />
     </div>
   );
 }

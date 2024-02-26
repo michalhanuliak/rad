@@ -6,11 +6,8 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface TaskDto {
-  createdAt: string;
-  description: string;
+export interface ToDoListDto {
   id: number;
-  isCompleted: boolean;
-  listId: number;
+  tasks: string[];
   title: string;
 }

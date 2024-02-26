@@ -4,3 +4,4 @@ export * from './Text/Text';
 export * from './CssBaseline/CssBaseline';
 export * from './Button/Button';
 export * from './TextField/TextField';
+export * from './ControlledTextField/ControlledTextField';
