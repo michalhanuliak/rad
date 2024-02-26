@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        node-version: [15]
+        node-version: [18]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
@@ -19,6 +19,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm ci
+        run: pnpm install --frozen-lockfile
       - name: UI tests
         run: pnpm test:ui:unit
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests for To Do List
+        run: pnpm test:to-do-list:e2e
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

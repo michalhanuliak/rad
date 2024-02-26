@@ -14,6 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <h1>To do list</h1>
         <PageWrapper>{children}</PageWrapper>
       </body>
     </html>

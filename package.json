@@ -11,7 +11,8 @@
     "ui:gen:organism": "scripts/ui-components.sh organisms",
     "ui:gen:template": "scripts/ui-components.sh template",
     "gen:infra": "npx orval --config ./lib/infrastructure/config/orval.config.js",
-    "test:ui:unit": "nx run ui:test"
+    "test:ui:unit": "nx run ui:test",
+    "test:to-do-list:e2e": "nx e2e to-do-list-e2e"
   },
   "private": true,
   "dependencies": {
