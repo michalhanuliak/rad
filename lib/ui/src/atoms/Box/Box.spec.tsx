@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import Box from './Box';
+import { Box } from './Box';
 
 describe('Box', () => {
   it('should render successfully', () => {

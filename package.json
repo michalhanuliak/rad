@@ -10,7 +10,8 @@
     "ui:gen:molecule": "scripts/ui-components.sh molecules",
     "ui:gen:organism": "scripts/ui-components.sh organisms",
     "ui:gen:template": "scripts/ui-components.sh template",
-    "gen:infra": "npx orval --config ./lib/infrastructure/config/orval.config.js"
+    "gen:infra": "npx orval --config ./lib/infrastructure/config/orval.config.js",
+    "test:ui:unit": "nx run ui:test"
   },
   "private": true,
   "dependencies": {
